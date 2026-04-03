@@ -1,0 +1,5 @@
+{
+  "name": "Voice-Based Transport Management System",
+  "description": "A web-based application for managing transport services using voice commands, featuring voice recognition, text-to-speech, and a modern dashboard.",
+  "requestFramePermissions": ["microphone"]
+}

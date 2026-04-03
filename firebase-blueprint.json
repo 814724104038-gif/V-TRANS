@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Transport": {
+      "title": "Transport",
+      "description": "Details of a transport service (bus, train, flight)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the service" },
+        "type": { "type": "string", "enum": ["bus", "train", "flight"] },
+        "from": { "type": "string", "description": "Origin city" },
+        "to": { "type": "string", "description": "Destination city" },
+        "departure": { "type": "string", "description": "Departure time" },
+        "arrival": { "type": "string", "description": "Arrival time" },
+        "price": { "type": "number", "description": "Ticket price" },
+        "availableSeats": { "type": "number", "description": "Number of seats available" }
+      },
+      "required": ["name", "type", "from", "to", "departure", "price", "availableSeats"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A user's booking for a transport service",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "ID of the user who booked" },
+        "transportId": { "type": "string", "description": "ID of the transport service" },
+        "transportName": { "type": "string" },
+        "transportType": { "type": "string" },
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "departure": { "type": "string" },
+        "bookingDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["confirmed", "cancelled"] }
+      },
+      "required": ["userId", "transportId", "transportName", "transportType", "from", "to", "departure", "bookingDate", "status"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and role information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["uid", "email", "displayName", "role"]
+    }
+  },
+  "firestore": {
+    "/transports/{transportId}": {
+      "schema": "Transport",
+      "description": "Collection of available transport services"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of user bookings"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Collection of user profiles"
+    }
+  }
+}
